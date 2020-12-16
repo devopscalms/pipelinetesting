@@ -11,27 +11,27 @@ pipeline {
 
         stage('Build Docker Image') {
           steps {
-            sh 'docker build -t sreeharshav/pipelinetesttesting:${BUILD_NUMBER} .'
+            sh 'docker build -tdevopscalms/pipelinetestingtesting:${BUILD_NUMBER} .'
             }
         }
 
         stage('Push Image to Docker Hub') {
           steps {
-           sh    'docker push sreeharshav/pipelinetesttesting:${BUILD_NUMBER}'
+           sh    'docker push devopscalms/pipelinetestingtesting:${BUILD_NUMBER}'
            }
         }
 
         stage('Deploy to Docker Host') {
           steps {
             sh    'docker -H tcp://10.1.1.200:2375 stop prodwebapp1 || true'
-            sh    'docker -H tcp://10.1.1.200:2375 run --rm -dit --name prodwebapp1 --hostname prodwebapp1 -p 8000:80 sreeharshav/pipelinetesttesting:${BUILD_NUMBER}'
+            sh    'docker -H tcp://10.1.1.200:2375 run --rm -dit --name prodwebapp1 --hostname prodwebapp1 -p 9000:80devopscalms/pipelinetestingtesting:${BUILD_NUMBER}'
             }
         }
 
         stage('Check WebApp Rechability') {
           steps {
           sh 'sleep 10s'
-          sh ' curl http://10.1.1.200:8000'
+          sh ' curl http://10.0.2.200:9000'
           }
         }
 
