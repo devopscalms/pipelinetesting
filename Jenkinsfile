@@ -4,8 +4,8 @@ pipeline {
 
         stage('Clone Repo') {
           steps {
-            sh 'rm -rf dockertest1'
-            sh 'git clone https://github.com/mavrick202/dockertest1.git'
+            sh 'rm -rf pipelinetesting'
+            sh 'https://github.com/devopscalms/pipelinetesting.git'
             }
         }
 
