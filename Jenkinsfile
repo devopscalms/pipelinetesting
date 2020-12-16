@@ -11,7 +11,9 @@ pipeline {
 
         stage('Build Docker Image') {
           steps {
-            sh 'docker build -tdevopscalms/pipelinetestingtesting:${BUILD_NUMBER} .'
+            sh 'cd /var/lib/jenkins/workspace/pipelinetesting/pipelinetesting'
+            sh 'cp /var/lib/jenkins/workspace/pipelinetesting/pipelinetesting/* /var/lib/jenkins/workspace/pipelinetesting' 
+            sh 'docker build -t devopscalms/pipelinetestingtesting:${BUILD_NUMBER} .'
             }
         }
 
